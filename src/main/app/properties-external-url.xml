@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder" xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd">
+	<spring:beans>
+		<spring:bean id="propertyLoader" class="org.viper.mule.properties.ExternalProperties">
+			<spring:property name="locations">
+				<spring:list>
+					<spring:value>check1.properties</spring:value>
+				</spring:list>
+			</spring:property>
+		</spring:bean>
+	</spring:beans>
+    <!-- <secure-property-placeholder:config name="Secure_Property_Placeholder" key="sdf" location="sdfsd" doc:name="Secure Property Placeholder"/>
+     --><context:property-placeholder location="check1.properties"/>
+    
+    <flow name="properties-external-urlFlow">
+        <poll doc:name="Poll">
+            <logger message="Flow Started" level="INFO" category="org.viper.mule.properties" doc:name="Logger"/>
+        </poll>
+        <logger message="${amazon.username} and ${msg} and ${final}" level="INFO" category="org.viper.mule.properties" doc:name="Logger"/>
+    </flow>
+
+</mule>
